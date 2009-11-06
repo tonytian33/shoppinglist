@@ -1,0 +1,11 @@
+<html>
+	<head></head>
+	<body>
+		<wicket:panel>
+			<div wicket:id="topToolBar">[top tool bar]</div>
+			<span wicket:it="itemList">
+				<span wicket:id="itemInfo"></span>
+			</span>
+		</wicket:panel>
+	</body>	
+</html>

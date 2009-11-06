@@ -15,6 +15,8 @@ public class ShopItem implements Serializable{
 	
 	private String timeAdded;
 	
+	private boolean editMode = false;
+	
 	public ShopItem(){
 		this.name = ""; 
 		this.qty = 1; 
@@ -23,10 +25,10 @@ public class ShopItem implements Serializable{
 		this.timeAdded = sdf.format(Calendar.getInstance().getTime());; 
 	}
 	
-	public ShopItem(String name, int qty, boolean checek, String timeAdded){
+	public ShopItem(String name, int qty, boolean check, String timeAdded){
 		this.name = name; 
 		this.qty = qty; 
-		this.checked = checked; 
+		this.checked = check; 
 		this.timeAdded = timeAdded; 
 	}
 	
@@ -45,6 +47,10 @@ public class ShopItem implements Serializable{
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
+	public boolean getChecked(){
+		return checked;
+	}
+	
 	public boolean isChecked() {
 		return checked;
 	}
@@ -53,5 +59,13 @@ public class ShopItem implements Serializable{
 	}
 	public String getTimeAdded() {
 		return timeAdded;
+	}
+
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
+	}
+
+	public boolean isEditMode() {
+		return editMode;
 	} 
 }
