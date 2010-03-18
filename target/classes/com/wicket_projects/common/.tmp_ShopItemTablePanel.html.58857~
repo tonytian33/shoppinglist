@@ -1,8 +1,0 @@
-t<html>
-	<head></head>
-	<body>
-		<wicket:panel>
-			<div wicket:id="topToolBar">[top tool bar]</div>
-		</wicket:panel>
-	</body>	
-</html>

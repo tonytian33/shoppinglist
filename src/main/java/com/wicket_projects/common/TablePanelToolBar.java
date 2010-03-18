@@ -4,23 +4,16 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.panel.Panel;
 
-public class TablePanelToolBar extends Panel {
+public abstract class TablePanelToolBar extends Panel {
 
 	public TablePanelToolBar(String id) {
 		super(id);
-		add(new AjaxFallbackLink("addItemLink") {
-
-			@Override
-			public void onClick(AjaxRequestTarget target) {
-				// TODO Auto-generated method stub
-			}
-		});
 
 		add(new AjaxFallbackLink("deleteItemLink") {
 			
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				// TODO Auto-generated method stub
+				doDeleteSelected(target);
 			}
 		});
 		
@@ -28,7 +21,7 @@ public class TablePanelToolBar extends Panel {
 			
 			@Override
 			public void onClick(AjaxRequestTarget target) {
-				// TODO Auto-generated method stub
+				doClearList(target);
 			}
 		});
 
@@ -41,4 +34,6 @@ public class TablePanelToolBar extends Panel {
 		});
 	}
 
+	public abstract void doClearList(AjaxRequestTarget target);
+	public abstract void doDeleteSelected(AjaxRequestTarget target);
 }

@@ -8,10 +8,10 @@
 	<!-- TODO project name  -->
 	<name>quickstart</name>
 	<description></description>
-	<!--
-		TODO <organization> <name>company name</name> <url>company url</url>
+		<organization> 
+			<name>Adscale Laboratory</name> 
+			<url>http://www.adscale.de</url>
 		</organization>
-	-->
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -20,19 +20,17 @@
 		</license>
 	</licenses>
 	<dependencies>
-		<!--  WICKET DEPENDENCIES -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket</artifactId>
 			<version>${wicket.version}</version>
 		</dependency>
-		<!--
-			OPTIONAL <dependency> <groupId>org.apache.wicket</groupId>
+		<dependency> 
+			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-extensions</artifactId>
-			<version>${wicket.version}</version> </dependency>
-		-->
-
-		<!-- LOGGING DEPENDENCIES - LOG4J -->
+			<version>${wicket.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>

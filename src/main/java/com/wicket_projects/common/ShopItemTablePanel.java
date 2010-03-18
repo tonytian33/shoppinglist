@@ -1,5 +1,9 @@
 package com.wicket_projects.common;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -9,6 +13,7 @@ import org.apache.wicket.model.Model;
 
 import com.wicket_projects.shoppinglist.model.ShopItem;
 import com.wicket_projects.shoppinglist.model.ShoppingListModel;
+import com.wicket_projects.shoppinglist.util.ItemListManager;
 
 public class ShopItemTablePanel extends Panel{
 	
@@ -19,7 +24,32 @@ public class ShopItemTablePanel extends Panel{
 		setOutputMarkupId(true);
 		this.shoppingList = (ShoppingListModel)shoppingList.getObject();
 		
-		add(new TablePanelToolBar("topToolBar"));
+		add(new TablePanelToolBar("topToolBar"){
+
+			@Override
+			public void doClearList(AjaxRequestTarget target) {
+				((ShoppingListModel)shoppingList.getObject()).getShopItems().clear();
+				target.addComponent(this.getParent());
+			}
+
+			@Override
+			public void doDeleteSelected(AjaxRequestTarget target) {
+				List<ShopItem> shopItems = ((ShoppingListModel)shoppingList.getObject()).getShopItems();
+				Iterator<ShopItem> it = shopItems.iterator();
+				List<ShopItem> itemsToDelete = new ArrayList<ShopItem>();
+				while(it.hasNext()){
+					ShopItem shopItem = it.next();
+					if (shopItem.isChecked())
+					{
+						itemsToDelete.add(shopItem);
+					}
+				}
+				shopItems.removeAll(itemsToDelete);
+				new ItemListManager().writeList(shopItems);
+				target.addComponent(this.getParent());
+			}
+			
+		});
 		
 		ListView itemList = new ListView("itemList",shoppingList.getObject().getShopItems()){
 
@@ -32,6 +62,8 @@ public class ShopItemTablePanel extends Panel{
 						// delete item 
 						if(shoppingList.getObject().getShopItems().contains(itemToDelete)){
 							shoppingList.getObject().getShopItems().remove(itemToDelete);
+							// save list
+							new ItemListManager().writeList(shoppingList.getObject().getShopItems());
 							// repaint the ShopItemTablePanel
 							target.addComponent(this.getParent().getParent().getParent());
 						}
@@ -40,7 +72,6 @@ public class ShopItemTablePanel extends Panel{
 					@Override
 					public void editItem(ShopItem itemToEdit,
 							AjaxRequestTarget target) {
-						// TODO Auto-generated method stub
 						itemToEdit.setEditMode(true);
 						target.addComponent(this.getParent().getParent().getParent());
 						
@@ -52,13 +83,12 @@ public class ShopItemTablePanel extends Panel{
 					
 					@Override
 					public void onSave() {
-						// TODO Auto-generated method stub
+						new ItemListManager().writeList(((ShoppingListModel)shoppingList.getObject()).getShopItems());
 						((ShopItem)getDefaultModelObject()).setEditMode(false);
 					}
 					
 					@Override
 					public void onCancel() {
-						// TODO Auto-generated method stub
 						((ShopItem)getDefaultModelObject()).setEditMode(false);
 						
 					}

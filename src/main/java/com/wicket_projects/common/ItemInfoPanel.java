@@ -11,6 +11,8 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.util.string.Strings;
 
 import com.wicket_projects.shoppinglist.model.ShopItem;
+import com.wicket_projects.shoppinglist.model.ShoppingListModel;
+import com.wicket_projects.shoppinglist.util.ItemListManager;
 
 public abstract class ItemInfoPanel extends Panel {
 	
@@ -41,7 +43,6 @@ public abstract class ItemInfoPanel extends Panel {
 			
 			@Override
 			public void onEditItem(AjaxRequestTarget target) {
-				// TODO Auto-generated method stub
 				editItem(shopItem, target);
 			}
 			
@@ -49,7 +50,6 @@ public abstract class ItemInfoPanel extends Panel {
 			public void onDeleteItem(AjaxRequestTarget target) {
 				// call hook method
 				deleteItemFromList(shopItem, target);
-				
 			}
 		});
 	}

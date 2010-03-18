@@ -2,6 +2,7 @@ package com.wicket_projects.shoppinglist.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ShoppingListModel implements Serializable {
@@ -10,9 +11,12 @@ public class ShoppingListModel implements Serializable {
 	
 	private List<ShopItem> shopItems;
 	
+	private List<ShopItem> defaultList;
+	
 	public ShoppingListModel(){
 		this.owner = "";
 		this.shopItems = new ArrayList<ShopItem>();
+		this.defaultList = new ArrayList<ShopItem>();
 	}
 	
 	public ShoppingListModel(String owner, List<ShopItem> shopItems){

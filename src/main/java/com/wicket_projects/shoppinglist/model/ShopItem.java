@@ -21,8 +21,7 @@ public class ShopItem implements Serializable{
 		this.name = ""; 
 		this.qty = 1; 
 		this.checked = false; 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-		this.timeAdded = sdf.format(Calendar.getInstance().getTime());; 
+		this.timeAdded = currentTimeString();
 	}
 	
 	public ShopItem(String name, int qty, boolean check, String timeAdded){
@@ -32,6 +31,20 @@ public class ShopItem implements Serializable{
 		this.timeAdded = timeAdded; 
 	}
 	
+	public ShopItem(ShopItem shopItemToCopy) {
+		this.name = shopItemToCopy.getName();
+		this.qty = shopItemToCopy.getQty();
+		this.checked = false; 
+		this.timeAdded = shopItemToCopy.getTimeAdded();
+	}
+
+	public ShopItem(String name, int qty, boolean check) {
+		this.name = name; 
+		this.qty = qty; 
+		this.checked = check; 
+		this.timeAdded = currentTimeString();
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -68,4 +81,9 @@ public class ShopItem implements Serializable{
 	public boolean isEditMode() {
 		return editMode;
 	} 
+	
+	private String currentTimeString(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+		return sdf.format(Calendar.getInstance().getTime());
+	}
 }

@@ -1,6 +1,7 @@
 package com.wicket_projects.common;
 
 
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.util.tester.TestPanelSource;
@@ -20,14 +21,25 @@ public class TablePanelToolBarTest {
 		tester.startPanel(new TestPanelSource() {
 			
 			public Panel getTestPanel(String panelId) {
-				return new TablePanelToolBar(panelId);
+				return new TablePanelToolBar(panelId){
+
+					@Override
+					public void doClearList(AjaxRequestTarget target) {
+						// do nothing
+					}
+
+					@Override
+					public void doDeleteSelected(AjaxRequestTarget target) {
+						// do nothing
+					}
+					
+				};
 			}
 		});
 	}
 	
 	@Test
 	public void testBasticRender() {
-		tester.assertComponent("panel:addItemLink", AjaxFallbackLink.class);
 		tester.assertComponent("panel:deleteItemLink", AjaxFallbackLink.class);
 		tester.assertComponent("panel:clearLink", AjaxFallbackLink.class);
 		tester.assertComponent("panel:emailLink", AjaxFallbackLink.class);
